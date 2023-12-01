@@ -1,4 +1,4 @@
-import mariadb
+import pymysql
 import random
 from datetime import datetime
 import time
@@ -12,7 +12,7 @@ def get_timestamp():
     return (current_time, current_date)
 
 def insert_to_db(msg, time, date, location):
-    conn = mariadb.connect(
+    conn = pymysql.connect(
     user='user1',
     password = '2ndSemester',
     host = '10.120.0.60',
