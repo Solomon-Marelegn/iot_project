@@ -1,7 +1,7 @@
 import paramiko
 
 def create_ssh_client():
-    host = '192.168.1.12'
+    host = '10.120.0.60'
     port = 22
     user = 'test'
     password = 'test'
