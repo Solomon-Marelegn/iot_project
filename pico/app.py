@@ -47,7 +47,6 @@ while True:
             mq.publish((message))
             print('published:', message[0:10])
             kontakt_pral(i[0])
-     
-./get 
+
 
 
