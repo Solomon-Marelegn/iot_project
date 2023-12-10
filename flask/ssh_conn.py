@@ -75,7 +75,6 @@ def execute_command_on_vm(cmd):
         return check_database_status(client)
     elif cmd == 'Mqtt_Sub':
         return check_mqtt_sub_status(client)
-    print('cmd', cmd)
 
 
 
