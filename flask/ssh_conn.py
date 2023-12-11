@@ -65,9 +65,9 @@ def stop_mqtt_subscriber(ssh_client):
         ssh_client.exec_command(f"kill {i}")
 
 def execute_command_on_vm(cmd):
-    host_list = {'Mqtt_Sub' : '10.120.0.60',
-                 'start' : '10.120.0.60',
-                 'stop' : '10.120.0.60',
+    host_list = {'Mqtt_Sub' : '10.120.0.49',
+                 'start' : '10.120.0.49',
+                 'stop' : '10.120.0.49',
                  'Mqtt_Broker': '10.120.0.23',
                  'Database': '10.120.0.76'
                 }
