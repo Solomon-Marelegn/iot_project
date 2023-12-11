@@ -14,7 +14,7 @@ def connect():
         connection = pymysql.connect(
             user='user1',
             password = 'test',
-            host = '10.120.0.201',
+            host = '10.120.0.76',
             port=3306,
             database = 'customer_satisfaction')
         print("connected to database")
