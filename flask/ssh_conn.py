@@ -70,7 +70,7 @@ def execute_command_on_vm(cmd):
                  'start' : '10.120.0.49',
                  'stop' : '10.120.0.49',
                  'Mqtt_Broker': '10.120.0.23',
-                 'Database': '10.120.0.201'
+                 'Database': '10.120.0.76'
                 }
     client = create_ssh_client(host_list[cmd])
     
