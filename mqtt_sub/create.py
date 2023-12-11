@@ -5,10 +5,9 @@ import sys
 conn = mariadb.connect(
     user='user1',
     password = '2ndSemester',
-    #host = '10.120.0.60',
-    host = '192.168.1.12',
+    host = '10.120.0.201',
     port=3306,
-    database = 'test')
+    database = 'customer_satisfaction')
 
 cur = conn.cursor()
 queries = [
