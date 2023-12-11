@@ -8,7 +8,7 @@ conn = pymysql.connect(
     host = '10.120.0.76',
     # host = '192.168.1.12',
     port=3306,
-    database = 'test')
+    database = 'customer_satisfaction)
 
 cur = conn.cursor()
 queries = [
