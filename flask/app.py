@@ -201,7 +201,7 @@ def admin():
 
 def get_device_status():
     device_status = {
-        'Mqtt_Broker': None,
+        'Mqtt_Broker': execute_command_on_vm('Mqtt_Broker'),
         'Mqtt_Sub': execute_command_on_vm('Mqtt_Sub'),
         'Database': execute_command_on_vm('Database'),
     }
