@@ -3,10 +3,8 @@ import pymysql
 
 conn = pymysql.connect(
     user='user1',
-    #password = 'test',
-    password = '2ndSemester',
-    # host = '10.120.0.209',
-    host = '192.168.1.12',
+    password = 'test',
+    host = '10.120.0.209',
     port=3306,
     database = 'customer_satisfaction')
 
