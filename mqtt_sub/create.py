@@ -1,8 +1,8 @@
-import mariadb
+import pymysql
 import sys
 
 
-conn = mariadb.connect(
+conn = pymysql.connect(
     user='user1',
     password = 'test',
     host = '10.120.0.76',
@@ -19,7 +19,7 @@ queries = [
         date VARCHAR(255) NOT NULL,
         location VARCHAR(255) NOT NULL,
         PRIMARY KEY (id)
-    );""" 
+    );"""
 ]
 
            
