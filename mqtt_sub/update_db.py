@@ -14,7 +14,6 @@ def insert_to_db(msg, time, date, location):
     user='user1',
     password = 'test',
     host = '10.120.0.209',
-    # host = '192.168.1.12',
     port=3306,
     database = 'customer_satisfaction')
     cur = conn.cursor()
