@@ -4,7 +4,7 @@ import sys
 
 conn = mariadb.connect(
     user='user1',
-    password = '2ndSemester',
+    password = 'test',
     host = '10.120.0.201',
     port=3306,
     database = 'customer_satisfaction')
