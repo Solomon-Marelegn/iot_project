@@ -1,8 +1,8 @@
-import mariadb
+import pymysql
 import sys
 
 
-conn = mariadb.connect(
+conn = pymysql.connect(
     user='user1',
     password = '2ndSemester',
     host = '10.120.0.76',
