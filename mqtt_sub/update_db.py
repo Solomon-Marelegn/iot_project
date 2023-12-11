@@ -18,7 +18,7 @@ def insert_to_db(msg, time, date, location):
     host = '10.120.0.76',
     # host = '192.168.1.12',
     port=3306,
-    database = 'test')
+    database = 'customer_satisfaction')
     cur = conn.cursor()
     query = f"""INSERT INTO ratings (feedback, time, date, location)  
                 VALUES('{msg}', '{time}', '{date}', '{location}');"""
