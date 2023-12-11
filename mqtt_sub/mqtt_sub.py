@@ -51,7 +51,7 @@ def subscribe(client, topic):
     client.on_message = on_message
 
 def run():
-    broker = '10.100.0.96'
+    broker = 'test.mosquitto.org'
     client_id = 'mqtt_subscriber_vm'
     topic = "ratings"
     port = 1883
