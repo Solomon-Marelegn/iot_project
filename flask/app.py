@@ -16,7 +16,7 @@ def connect():
             password = 'test',
             host = '10.120.0.201',
             port=3306,
-            database = 'test')
+            database = 'customer_satisfaction')
         print("connected to database")
         return connection
         
