@@ -1,7 +1,7 @@
 import paramiko
 
-def create_ssh_client():
-    host = '10.120.0.60'
+def create_ssh_client(host):
+    host = host
     port = 22
     user = 'test'
     password = 'test'
@@ -41,12 +41,12 @@ def check_mqtt_sub_status(ssh_client):
     else:
         return "Off"
 
-def mqtt_broker_status(ssh_client):
-    command = 'ps aux | grep Mqtt_custom_broker'
+def check_mqtt_broker_status(ssh_client):
+    command = 'ps aux | grep mosquitto'
     stdin, stdout, stderr = ssh_client.exec_command(command)
     process_list = stdout.read().decode()
-
-    if 'Mqtt_custom_broker' in process_list:
+    
+    if 'mosquitto+' in process_list:
         return 'On'
     else:
         return 'Off'
@@ -66,8 +66,16 @@ def stop_mqtt_subscriber(ssh_client):
         ssh_client.exec_command(f"kill {i}")
 
 def execute_command_on_vm(cmd):
-    client = create_ssh_client()
+    host_list = {'Mqtt_Sub' : '10.120.0.49',
+                 'start' : '10.120.0.49',
+                 'stop' : '10.120.0.49',
+                 'Mqtt_Broker': '10.120.0.23',
+                 'Database': '10.120.0.201'
+                }
+    client = create_ssh_client(host_list[cmd])
+    
     if cmd == 'start':
+        client = create_ssh_client()
         start_mqtt_subscriber(client)
     elif cmd == 'stop':
         stop_mqtt_subscriber(client)
@@ -75,7 +83,9 @@ def execute_command_on_vm(cmd):
         return check_database_status(client)
     elif cmd == 'Mqtt_Sub':
         return check_mqtt_sub_status(client)
-
+    elif cmd == 'Mqtt_Broker':
+        return check_mqtt_broker_status(client)
+    
 
 
 
