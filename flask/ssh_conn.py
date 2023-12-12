@@ -24,7 +24,7 @@ def check_database_status(ssh_client):
     command = 'ps aux | grep mysql'
     stdin, stdout, stderr = ssh_client.exec_command(command)
     process_list = stdout.read().decode()
-    if 'mysqld' in process_list:
+    if 'mariadbd' in process_list:
         return 'On'
     else:
         return 'Off'
