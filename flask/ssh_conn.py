@@ -67,7 +67,7 @@ def execute_command_on_vm(cmd):
     host_list = {'Mqtt_Sub'   : ['192.168.2.20', 'test', 'test'],
                  'start'      : ['192.168.2.20', 'test', 'test'],
                  'stop'       : ['192.168.2.20', 'test', 'test'],
-                 'Mqtt_Broker': ['192.168.2.18', 'solo', 'test'],
+                 'Mqtt_Broker': ['192.168.2.18', 'test', 'test'],
                  'Database'   : ['192.168.2.21', 'test', 'test']
                 }
 
