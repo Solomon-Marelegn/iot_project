@@ -143,7 +143,7 @@ def total():
 
 @app.route('/per_region')
 def per_region():
-    locations = ['1e:e8:29:9a:5c:af', '22:e8:29:9a:5d:1f']
+    locations = ['1e:e8:29:9a:5d:1f', '1e:e8:29:9a:5c:af']
     data_1 = get_statistic(locations[0])
     data_2 = get_statistic(locations[1])
     latest_data_1 = get_raw_data(5, locations[0])
