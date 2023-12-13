@@ -3,7 +3,6 @@ import signal
 import sys
 from paho.mqtt import client as mqtt_client
 import update_db
-from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -27,22 +26,16 @@ def connect_mqtt(broker, client_id, port):
     return client
 
 
-def get_timestamp():
-    current_datetime = datetime.now()
-    current_time = current_datetime.strftime("%H:%M:%S")
-    current_date = current_datetime.strftime("%d/%m/%Y")
-    return current_time, current_date
-
 def on_message(client, userdata, msg):
     try:
         msg = msg.payload.decode()
         feedback = msg[0:10]
-        location = msg[10:-3]
-        dbm = msg[-3:]
-        recived_time, recived_date = get_timestamp()
-        logger.info(f"Received message: {feedback} at {recived_time}, {recived_date}")
-        update_db.insert_to_db(feedback, recived_time, recived_date, location)
-        logger.info(f'Inserted message: {feedback}, {recived_date}, {recived_time} to db')
+        location = msg[10:27]
+        _time, _date = msg[27:35], msg[35:]
+    
+        logger.info(f"Received message: {feedback} from {location} at {_time}, {_date}")
+        update_db.insert_to_db(feedback, _time, _date, location)
+        logger.info(f'Inserted message: {feedback}, {_date}, {_time} to db')
     except Exception as e:
         logger.error(f"Error processing message: {e}")
 
