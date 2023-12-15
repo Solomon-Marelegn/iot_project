@@ -66,7 +66,7 @@ def create_mac_addres_db():
     conn = connect('known_mac_addresses')
     cur = conn.cursor()
     
-    mac_address_arr = ['18:e8:29:9a:5d:1f', '18:e8:29:9a:5c:af']
+    mac_address_arr = ['18:e8:29:9a:5c:af', '18:e8:29:9a:5d:1f']
     queries = [
         """DROP TABLE IF EXISTS mac_address;""",
         """CREATE TABLE mac_address (
