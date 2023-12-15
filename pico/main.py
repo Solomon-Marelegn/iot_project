@@ -14,19 +14,20 @@ def get_ap_mac():
     ssid = 'iot-network'
     password = "test!12345"
     mac = net.net_connect(ssid, password)
-    try:
-        if mac.startswith('18:e8:29'):
-            led.on()
-            return mac
-    except AttributeError:
-        print('no acces point found')
+    if mac:
+        led.on()
+    return mac
 
 def check_wifi():
+    print('checking')
     return ping.ping()
+
 
 def reconnect():
     led.off()
-    return get_ap_mac()
+    mac = get_ap_mac()
+
+    return mac if mac is not None else get_ap_mac()
 
 
 def kontakt_pral(button):
@@ -63,7 +64,7 @@ def get_timestamp(mode=None):
 def main():
     mac = get_ap_mac()
 
-    pleased = Pin(12, Pin.IN, Pin.PULL_DOWN)
+    pleased = Pin(13, Pin.IN, Pin.PULL_DOWN)
     neutral = Pin(14, Pin.IN, Pin.PULL_DOWN)
     displeased = Pin(15, Pin.IN, Pin.PULL_DOWN)
 
@@ -73,7 +74,7 @@ def main():
         (displeased, 'displeased')
     ]
 
-    broker = 'test.mosquitto.org'
+    broker = '192.168.2.18'
     client_id = 'pico_mqtt_publisher'
     topic = "ratings"
     mq = MQTT_Publisher(broker, client_id, topic)
@@ -84,7 +85,7 @@ def main():
 
     while True:
         current_time = get_timestamp('unformated')
-        if current_time - reference_time >= 5:
+        if current_time - reference_time >= 1500 :
             if check_wifi():
                 pass
             else:
