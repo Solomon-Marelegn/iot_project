@@ -3,7 +3,7 @@ import signal
 import sys
 from paho.mqtt import client as mqtt_client
 import update_db
-
+from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -25,13 +25,18 @@ def connect_mqtt(broker, client_id, port):
     client.connect(broker, port)
     return client
 
+def get_timestamp():
+    current_datetime = datetime.now()
+    current_time = current_datetime.strftime("%H:%M:%S")
+    current_date = current_datetime.strftime("%d/%m/%Y")
+    return current_time, current_date
 
 def on_message(client, userdata, msg):
     try:
         msg = msg.payload.decode()
         feedback = msg[0:10]
-        location = msg[10:27]
-        _time, _date = msg[27:35], msg[35:]
+        location = msg[10:]
+        _time, _date = get_timestamp()
     
         logger.info(f"Received message: {feedback} from {location} at {_time}, {_date}")
         update_db.insert_to_db(feedback, _time, _date, location)
@@ -43,7 +48,7 @@ def subscribe(client, topic):
     client.on_message = on_message
 
 def run():
-    broker = 'test.mosquitto.org'
+    broker = '192.168.2.18'
     client_id = 'mqtt_subscriber_vm'
     topic = "ratings"
     port = 1883
