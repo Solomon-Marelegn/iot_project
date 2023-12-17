@@ -7,6 +7,27 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def main():
+    broker = 'test.mosquitto.org'
+    client_id = 'mqtt_subscriber_vm'
+    topic = "ratings"
+    port = 1883
+
+    client = connect_mqtt(broker, client_id, port)
+    subscribe(client, topic)
+
+    def on_exit(signum, frame):
+        logger.info("Shutting down gracefully...")
+        client.disconnect()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, on_exit)
+
+    try:
+        client.loop_forever()
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt received. Exiting...")
+
 def connect_mqtt(broker, client_id, port):
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -47,26 +68,6 @@ def subscribe(client, topic):
     client.subscribe(topic)
     client.on_message = on_message
 
-def run():
-    broker = '192.168.2.18'
-    client_id = 'mqtt_subscriber_vm'
-    topic = "ratings"
-    port = 1883
-
-    client = connect_mqtt(broker, client_id, port)
-    subscribe(client, topic)
-
-    def on_exit(signum, frame):
-        logger.info("Shutting down gracefully...")
-        client.disconnect()
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, on_exit)
-
-    try:
-        client.loop_forever()
-    except KeyboardInterrupt:
-        logger.info("Keyboard interrupt received. Exiting...")
 
 if __name__ == "__main__":
-    run()
+    main()
